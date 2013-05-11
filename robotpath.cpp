@@ -101,6 +101,36 @@ void RobotPath::Movement(Robot &bot) {
                 }
             }
         } break;
+        case 2: {
+            if(this->map->popValue(QPoint_LEFT+bot.Pos) == bot.ID || this->map->popValue(QPoint_LEFT+bot.Pos) == SHARED) {
+                if(bot.PrevDir != RIGHT) {
+                    bot.PrevDir = bot.Dir = LEFT;
+                    bot.Pos    += QPoint_LEFT;
+                    return;
+                }
+            }
+            if(this->map->popValue(QPoint_UP+bot.Pos) == bot.ID || this->map->popValue(QPoint_UP+bot.Pos) == SHARED) {
+                if(bot.PrevDir != DOWN) {
+                    bot.PrevDir = bot.Dir = UP;
+                    bot.Pos    += QPoint_UP;
+                    return;
+                }
+            }
+            if(this->map->popValue(QPoint_DOWN+bot.Pos) == bot.ID || this->map->popValue(QPoint_DOWN+bot.Pos) == SHARED) {
+                if(bot.PrevDir != UP) {
+                    bot.PrevDir = bot.Dir = DOWN;
+                    bot.Pos    += QPoint_DOWN;
+                    return;
+                }
+            }
+            if(this->map->popValue(QPoint_RIGHT+bot.Pos) == bot.ID || this->map->popValue(QPoint_RIGHT+bot.Pos) == SHARED) {
+                if(bot.PrevDir != LEFT) {
+                    bot.PrevDir = bot.Dir = RIGHT;
+                    bot.Pos    += QPoint_RIGHT;
+                    return;
+                }
+            }
+        } break;
     }
 }
 
