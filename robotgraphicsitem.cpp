@@ -11,14 +11,16 @@ RobotGraphicsItem::RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *paren
 }
 
 int RobotGraphicsItem::animateMovement(){
-    qDebug("error");
+    qDebug("error1");
     if(!isFinished) {
-        qDebug("error");
+        bool x = this->actualPathPosition == this->path->end()
+        qDebug("ASSERT: %d",);
         if(this->actualPathPosition < this->path->end()) {
+            qDebug("error3");
             this->calculatePosition((*actualPathPosition));
             qDebug("Bad allocation");
-            this->setPos(this->actualScenePosition);
-            this->actualPathPosition++;
+            this->setPos(this->mapToScene(this->actualScenePosition));
+            this->actualPathPosition += 1;
         }
         if(this->actualPosition == this->end) {
             this->isFinished = true;
