@@ -5,6 +5,7 @@
 #include "robotpath.h"
 #include "robotgriditem.h"
 #include "robotgridmatrix.h"
+#include "robotgraphicsitem.h"
 #include "map.h"
 #include <QMessageBox>
 #include <QPixmap>
@@ -54,8 +55,13 @@ void MainWindow::on_actionRun_triggered() {
 
     RobotPath(Maze, path_1, path_2);
     //QListIterator<QPoint> i(path_1); while(i.hasNext()) qDebug() << i.next();
-    QGraphicsPixmapItem *c = scene->addPixmap(QPixmap(":/terrain/monolith3.png"));
-    c->setPos(0,5*71);
+    RobotGraphicsItem *bot = new RobotGraphicsItem(QPixmap(":terrain/monument3.png"),0,path_1,QPoint(0,7));
+    scene->addItem(bot);
+    RobotGraphicsObject *O_bot = new RobotGraphicsObject(QPixmap(":terrain/monument3.png"),0,path_1,QPoint(0,7));
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()),ui->areaPlot, SLOT(animateMovement()));
+    timer->start(100);
+
     qDebug() << "Action->run";
 }
 
