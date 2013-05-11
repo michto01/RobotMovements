@@ -11,7 +11,9 @@ RobotGraphicsItem::RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *paren
 }
 
 int RobotGraphicsItem::animateMovement(){
+    qDebug("error");
     if(!isFinished) {
+        qDebug("error");
         if(this->actualPathPosition < this->path->end()) {
             this->calculatePosition((*actualPathPosition));
             qDebug("Bad allocation");
@@ -26,7 +28,6 @@ int RobotGraphicsItem::animateMovement(){
         return 0;
     }
     else return 1;
-
 }
 
 void RobotGraphicsItem::calculatePosition(QPoint point) {
