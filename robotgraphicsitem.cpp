@@ -40,3 +40,11 @@ RobotGraphicsItem::~RobotGraphicsItem()
 
 RobotGraphicsObject::RobotGraphicsObject(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> path, QPoint end): RobotGraphicsItem(pixmap,parent,path,end){
 }
+
+RobotGraphicsObject::~RobotGraphicsObject(){
+}
+
+void RobotGraphicsObject::animate(){
+    this->animateMovement();
+    return;
+}

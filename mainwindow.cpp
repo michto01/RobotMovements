@@ -58,9 +58,7 @@ void MainWindow::on_actionRun_triggered() {
     RobotGraphicsItem *bot = new RobotGraphicsItem(QPixmap(":terrain/monument3.png"),0,path_1,QPoint(0,7));
     scene->addItem(bot);
     RobotGraphicsObject *O_bot = new RobotGraphicsObject(QPixmap(":terrain/monument3.png"),0,path_1,QPoint(0,7));
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()),ui->areaPlot, SLOT(animateMovement()));
-    timer->start(100);
+    d
 
     qDebug() << "Action->run";
 }
