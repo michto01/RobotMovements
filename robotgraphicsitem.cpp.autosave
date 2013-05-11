@@ -24,6 +24,7 @@ int RobotGraphicsItem::animation(QAnimationGroup &group) {
         this->actualScenePosition = this->calculatePosition((*actualPosition));
         QPropertyAnimation *animation = new QPropertyAnimation(this, this->actualScenePosition);
         animation->setDuration(300);
+        
 
     }
 }

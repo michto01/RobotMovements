@@ -5,7 +5,10 @@
 #include <QPoint>
 #include <QPixmap>
 #include <QObject>
+#include <QAnimationGroup>
+#include <QPropertyAnimation>
 #include <QGraphicsPixmapItem>
+#include <QSequentialAnimationGroup>
 
 class RobotGraphicsItem : public QGraphicsPixmapItem  {
 
@@ -20,7 +23,7 @@ private:
 public:
     RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> path, QPoint end);
     void calculatePosition(QPoint point);
-    int animateMovement();
+    int animation(QAnimationGroup &group);
     ~RobotGraphicsItem();
 };
 
