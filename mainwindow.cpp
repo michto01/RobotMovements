@@ -57,7 +57,8 @@ void MainWindow::on_actionRun_triggered() {
     //QListIterator<QPoint> i(path_1); while(i.hasNext()) qDebug() << i.next();
     RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0,path_1,QPoint(0,7));
     scene->addItem(bot);
-    int x = bot->animateMovement();
+    QSequentialAnimationGroup *Bot1Path1 = new QSequentialAnimationGroup;
+    bot->animation(Bot1Path1);
     qDebug() << "Action->run";
 }
 

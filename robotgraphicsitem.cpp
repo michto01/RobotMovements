@@ -5,7 +5,7 @@ RobotGraphicsItem::RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *paren
     this->end        = end;
     this->isFinished = false;
     this->actualPathPosition = this->path->begin();
-    this->animateMovement();
+    //this->animateMovement();
 
     qDebug("RobotGraphicItem::Constructor : all setting applied");
 }
@@ -18,13 +18,15 @@ void RobotGraphicsItem::calculatePosition(QPoint point) {
         this->actualScenePosition = QPoint(this->actualPosition.x()*54,(this->actualPosition.y()*71)+35);
 }
 
-int RobotGraphicsItem::animation(QAnimationGroup &group) {
+void RobotGraphicsItem::animation(QSequentialAnimationGroup *group) {
     for(this->actualPathPosition = this->path->begin(); this->actualPathPosition != this->path->end(); ++actualPathPosition) {
-        (*actualPathPosition) = this->actualPathPosition;
-        this->actualScenePosition = this->calculatePosition((*actualPosition));
-        QPropertyAnimation *animation = new QPropertyAnimation(this, this->actualScenePosition);
-        animation->setDuration(300);
+        this->actualPosition = *(actualPathPosition);
+        this->calculatePosition(this->actualPosition);
+        this->setPos(this->actualScenePosition);
+        QPropertyAnimation *animation = new QPropertyAnimation(this,"pos");
 
+        animation->setDuration(300);
+        group->addAnimation(animation);
     }
 }
 
@@ -40,6 +42,6 @@ RobotGraphicsObject::~RobotGraphicsObject(){
 }
 
 void RobotGraphicsObject::animate(){
-    this->animateMovement();
+    //this->animation();
     return;
 }
