@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>walle.ico</file>
+        <file>refresh.ico</file>
+        <file>generate.ico</file>
+        <file>map.ico</file>
+        <file>critic.ico</file>
+        <file>all.ico</file>
+        <file>road_sign.ico</file>
+        <file>instructions.ico</file>
+        <file>info.ico</file>
+    </qresource>
+    <qresource prefix="/terrain">
+        <file>basic.png</file>
+        <file>bones.png</file>
+        <file>burial.png</file>
+        <file>deciduous-summer4.png</file>
+        <file>desert-plant5.png</file>
+        <file>desert-plant7.png</file>
+        <file>green.png</file>
+        <file>grounds.png</file>
+        <file>human3.png</file>
+        <file>keep-tile.png</file>
+        <file>monolith3.png</file>
+        <file>regular.png</file>
+    </qresource>
+    <qresource prefix="/files">
+        <file>about.html</file>
+        <file>instructions.html</file>
+    </qresource>
+</RCC>

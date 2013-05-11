@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1980</width>
+    <height>1080</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Robot movements and critic points highlighting application</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Icons.qrc">
+    <normaloff>:/icons/walle.ico</normaloff>:/icons/walle.ico</iconset>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>36</width>
+    <height>36</height>
+   </size>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QGraphicsView" name="areaPlot">
+      <property name="maximumSize">
+       <size>
+        <width>1900</width>
+        <height>1000</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>900</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <widget class="QMenu" name="menuExport">
+     <property name="title">
+      <string>Export</string>
+     </property>
+     <addaction name="actionExportMap"/>
+     <addaction name="actionExportMovements"/>
+     <addaction name="actionExportCriticalPlaces"/>
+     <addaction name="separator"/>
+     <addaction name="actionExportAll"/>
+    </widget>
+    <widget class="QMenu" name="menuImport">
+     <property name="title">
+      <string>Import</string>
+     </property>
+     <addaction name="actionImportAll"/>
+     <addaction name="separator"/>
+     <addaction name="actionImportMap"/>
+    </widget>
+    <addaction name="menuExport"/>
+    <addaction name="menuImport"/>
+    <addaction name="separator"/>
+    <addaction name="actionRun"/>
+    <addaction name="actionReset"/>
+    <addaction name="actionGenerate"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionHelpInstructions"/>
+    <addaction name="actionHelpAbout"/>
+   </widget>
+   <addaction name="menuMenu"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>BottomToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionExportMap">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/map.ico</normaloff>:/icons/map.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Map</string>
+   </property>
+  </action>
+  <action name="actionExportMovements">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/road_sign.ico</normaloff>:/icons/road_sign.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Movements</string>
+   </property>
+  </action>
+  <action name="actionExportCriticalPlaces">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/critic.ico</normaloff>:/icons/critic.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Critical places</string>
+   </property>
+  </action>
+  <action name="actionExportAll">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/all.ico</normaloff>:/icons/all.ico</iconset>
+   </property>
+   <property name="text">
+    <string>All</string>
+   </property>
+  </action>
+  <action name="actionImportAll">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/all.ico</normaloff>:/icons/all.ico</iconset>
+   </property>
+   <property name="text">
+    <string>All</string>
+   </property>
+  </action>
+  <action name="actionImportMap">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/map.ico</normaloff>:/icons/map.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Map</string>
+   </property>
+  </action>
+  <action name="actionHelpInstructions">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/instructions.ico</normaloff>:/icons/instructions.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Instructions</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Instruction for using the programme&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionHelpAbout">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/info.ico</normaloff>:/icons/info.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="actionRun">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/walle.ico</normaloff>:/icons/walle.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Run</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/refresh.ico</normaloff>:/icons/refresh.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Re&amp;set</string>
+   </property>
+   <property name="shortcut">
+    <string>F6</string>
+   </property>
+  </action>
+  <action name="actionGenerate">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/generate.ico</normaloff>:/icons/generate.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Generate</string>
+   </property>
+   <property name="shortcut">
+    <string>F12</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="Icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>
