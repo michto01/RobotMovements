@@ -55,8 +55,9 @@ void MainWindow::on_actionRun_triggered() {
 
     RobotPath(Maze, path_1, path_2);
     //QListIterator<QPoint> i(path_1); while(i.hasNext()) qDebug() << i.next();
-    RobotGraphicsObject *O_bot = new RobotGraphicsObject(QPixmap(":terrain/monument3.png"),0,path_1,QPoint(0,7));
-    O_bot->animate();
+    RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/grounds.png"),0,path_1,QPoint(0,7));
+    scene->addItem(bot);
+    bot->animateMovement();
     qDebug() << "Action->run";
 }
 

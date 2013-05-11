@@ -5,13 +5,17 @@ RobotGraphicsItem::RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *paren
     this->end        = end;
     this->isFinished = false;
     this->actualPathPosition = this->path->begin();
+    this->animateMovement();
+
+    qDebug("RobotGraphicItem::Constructor : all setting applied");
 }
 
 int RobotGraphicsItem::animateMovement(){
     if(!isFinished) {
         if(this->actualPathPosition < this->path->end()) {
             this->calculatePosition((*actualPathPosition));
-            this->setPos(mapToParent(this->actualScenePosition));
+            qDebug("Bad allocation");
+            this->setPos(this->actualScenePosition);
             this->actualPathPosition++;
         }
         if(this->actualPosition == this->end) {
