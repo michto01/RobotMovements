@@ -30,7 +30,7 @@ public:
 
 class RobotGraphicsObject : public QObject, public RobotGraphicsItem {
     Q_OBJECT
-    Q_PROPERTY (QPoint pos READ Pos WRITE setPos)
+    //Q_PROPERTY (QPoint pos READ Pos WRITE setPos)
 public slots:
     void animation();
 public:

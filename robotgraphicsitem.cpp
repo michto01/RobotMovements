@@ -19,7 +19,7 @@ void RobotGraphicsItem::calculatePosition(QPoint point) {
 }
 
 void RobotGraphicsItem::animation(QSequentialAnimationGroup *group) {
-    for(this->actualPathPosition = this->path->begin(); this->actualPathPosition != this->path->end(); ++actualPathPosition) {
+    /*for(this->actualPathPosition = this->path->begin(); this->actualPathPosition != this->path->end(); ++actualPathPosition) {
         this->actualPosition = *(actualPathPosition);
         this->calculatePosition(this->actualPosition);
         this->setPos(this->actualScenePosition);
@@ -27,7 +27,7 @@ void RobotGraphicsItem::animation(QSequentialAnimationGroup *group) {
 
         animation->setDuration(300);
         group->addAnimation(animation);
-    }
+    }*/
 }
 
 RobotGraphicsItem::~RobotGraphicsItem()
@@ -41,7 +41,8 @@ RobotGraphicsObject::RobotGraphicsObject(const QPixmap &pixmap, QGraphicsItem *p
 RobotGraphicsObject::~RobotGraphicsObject(){
 }
 
-void RobotGraphicsObject::animate(){
+void RobotGraphicsObject::animation() {
     //this->animation();
     return;
 }
+

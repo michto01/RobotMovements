@@ -31,7 +31,7 @@ public:
        void addItem(QPoint p, int value, QString terrain);
     QString popTrrain(QPoint p);
         int popValue(QPoint p);
-        void mapFromArray(int array[][10]);
+       void mapFromArray(int array[][10]);
 };
 
 #endif // MAP_H

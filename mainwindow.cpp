@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "aboutdialog.h"
 #include "instructionsdialog.h"
+#include "robotmap.h"
 #include "robotpath.h"
 #include "robotgriditem.h"
 #include "robotgridmatrix.h"
@@ -43,8 +44,16 @@ void MainWindow::on_actionRun_triggered() {
 
     //Maze.ImportMaze(ib);
 
+    RobotMapPath one(0); /** Path for 1 robot */
+    RobotMapPath two(0); /** Path for 2 robot */
+
+    one.CreatePath();
+    two.CreatePath();
+
+    one.common_map(two);
+
     Map Maze;
-    Maze.mapFromArray(ib);
+    Maze.mapFromArray(one.map);
     Matrix.MapToScene(Maze);
     Matrix.AttachToScene(scene);
     qDebug(">>> %d >>>", Maze.popValue(QPoint(0,0)));
@@ -57,7 +66,7 @@ void MainWindow::on_actionRun_triggered() {
     //QListIterator<QPoint> i(path_1); while(i.hasNext()) qDebug() << i.next();
     RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0,path_1,QPoint(0,7));
     scene->addItem(bot);
-    QSequentialAnimationGroup *Bot1Path1 = new QSequentialAnimationGroup;
+    //QSequentialAnimationGroup *Bot1Path1 = new QSequentialAnimationGroup;
     //bot->animation(Bot1Path1);
     qDebug() << "Action->run";
 }

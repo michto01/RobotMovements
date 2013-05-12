@@ -8,10 +8,8 @@
 
 class RobotMap {
 
-protected:
-    int map[8][10];
-
 public:
+    int map[8][10];
     RobotMap();
     ~RobotMap();
     int SetWidth(int x);

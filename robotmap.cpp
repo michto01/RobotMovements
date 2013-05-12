@@ -22,8 +22,8 @@ int RobotMap::SetHeight(int x) {
 void RobotMap::Draw() {
     for (int i=0;i<8;i++) {
         for (int j=0;j<10;j++)
-            cout<<map[7-i][j]<<" ";
-        cout<<endl;
+            std::cout << map[7-i][j]<<" ";
+        std::cout << std::endl;
     }
 }
 
@@ -89,7 +89,7 @@ int RobotMapPath::Step() {
 }
 
 void RobotMapPath::Write() {
-    ofstream vyst_soub;
+    std::ofstream vyst_soub;
 
     if (robot) {
         vyst_soub.open("mapaklad.txt");
@@ -98,7 +98,7 @@ void RobotMapPath::Write() {
             for (int j=0;j<10;j++) {
                 vyst_soub << this->map[7-i][j] << " ";
             }
-            vyst_soub << endl;
+            vyst_soub << std::endl;
         }
     }
     else {
@@ -108,7 +108,7 @@ void RobotMapPath::Write() {
             for (int j=0;j<10;j++) {
                 vyst_soub<< this->map[7-i][j] << " ";
             }
-            vyst_soub << endl;
+            vyst_soub << std::endl;
         }
     }
 }
@@ -253,11 +253,13 @@ int RobotMapPath::NextDirection() {
     if (random==4) {
         return 2;
     }
+
+    return -1;
 }
 
 int RobotMapPath::common_map(RobotMapPath b) {
     int common[8][10];
-    ofstream vyst_soub;
+    std::ofstream vyst_soub;
 
     for (int i=0;i<8;i++) {
         for (int j=0;j<10;j++) {
@@ -282,7 +284,7 @@ int RobotMapPath::common_map(RobotMapPath b) {
         for (int j=0;j<10;j++) {
             vyst_soub<<common[7-i][j]<<" ";
         }
-        vyst_soub<<endl;
+        vyst_soub<<std::endl;
     }
 
     return 0;
