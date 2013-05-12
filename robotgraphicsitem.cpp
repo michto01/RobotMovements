@@ -23,7 +23,7 @@ void RobotGraphicsItem::animation(QSequentialAnimationGroup *group) {
         this->actualPosition = *(actualPathPosition);
         this->calculatePosition(this->actualPosition);
         this->setPos(this->actualScenePosition);
-        QPropertyAnimation *animation = new QPropertyAnimation(this,"pos");
+        QPropertyAnimation *animation = new QPropertyAnimation(this, "pos",0);
 
         animation->setDuration(300);
         group->addAnimation(animation);

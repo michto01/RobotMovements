@@ -58,7 +58,7 @@ void MainWindow::on_actionRun_triggered() {
     RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0,path_1,QPoint(0,7));
     scene->addItem(bot);
     QSequentialAnimationGroup *Bot1Path1 = new QSequentialAnimationGroup;
-    bot->animation(Bot1Path1);
+    //bot->animation(Bot1Path1);
     qDebug() << "Action->run";
 }
 

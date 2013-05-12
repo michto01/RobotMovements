@@ -18,6 +18,7 @@ private:
     QPoint        actualPosition;
     QPoint        actualScenePosition;
     QPoint        end;
+    QRectF        boundingRect();
     int           isFinished;
 
 public:
