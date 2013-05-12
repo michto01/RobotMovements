@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     robotgriditem.cpp \
     robotgridmatrix.cpp \
     robotpath.cpp \
-    robotgraphicsitem.cpp
+    robotgraphicsitem.cpp \
+    robotmap.cpp
 
 HEADERS  += mainwindow.h \
         map.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
     robotgriditem.h \
     robotgridmatrix.h \
     robotpath.h \
-    robotgraphicsitem.h
+    robotgraphicsitem.h \
+    robotmap.h
 
 FORMS    += mainwindow.ui \
         aboutdialog.ui \
