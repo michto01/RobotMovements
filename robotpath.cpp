@@ -23,7 +23,7 @@ RobotPath::RobotPath(RobotGridMatrix *Maze, QList<QPoint> botOnePath, QList<QPoi
         this->botTwoPath->append(bot2.Pos);
     }
 
-    int t=1;
+    int t = 1;
     while((bot1.Pos != QPoint(0,7))) {
         this->FindDirection(bot1, 1);
         this->MakeStep(bot1);
@@ -62,16 +62,19 @@ RobotPath::RobotPath(Map maze, QList<QPoint> botOnePath, QList<QPoint> botTwoPat
         bot2.PrevDir = DEFAULT;
         this->botTwoPath->append(bot2.Pos);
     }
-    while((bot1.Pos != QPoint(0,7))) {
+    int t = 0;
+    while((bot1.Pos != QPoint(0,7)) || t < 50) {
         this->Movement(bot1);
         this->botOnePath->append(bot1.Pos);
         qDebug("ACTUAL: MAZE[%d][%d]",bot1.Pos.x(),bot1.Pos.y());
+        t++;
     }
-
-    while((bot2.Pos != QPoint(0,0))) {
+    t = 0;
+    while((bot2.Pos != QPoint(0,0)) || t < 50) {
         this->Movement(bot2);
         this->botOnePath->append(bot2.Pos);
         qDebug("ACTUAL2: MAZE[%d][%d]",bot2.Pos.x(),bot2.Pos.y());
+        t++;
     }
 }
 
