@@ -7,12 +7,12 @@
 #include "aboutdialog.h"
 #include "mainwindow.h"
 
-#include "robotgraphicsitem.h"
-#include "robotgridmatrix.h"
-#include "robotgriditem.h"
-#include "robotpath.h"
-#include "robotmap.h"
-#include "map.h"
+#include "robotgraphicsitem.h" /** Contains RobotGraphicsItem & RobotGraphicObject */
+#include "robotgridmatrix.h"   /** Contains RobotGridMatrix */
+#include "robotgriditem.h"     /** Contains RobotGridItem   */
+#include "robotpath.h"         /** Contains RobotPath */
+#include "robotmap.h"          /** Contains RobotPathMap & RobotMap */
+#include "map.h"               /** Contains Map */
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,31 +26,31 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_actionRun_triggered() {
 
-    QGraphicsScene *scene = new QGraphicsScene(this);
-    ui->areaPlot->setScene(scene);
-    ui->areaPlot->setRenderHint(QPainter::Antialiasing);
+    QGraphicsScene *scene = new QGraphicsScene(this); /** Create new scene */
+    QList<RobotGridItem*> grid;                       /** List holding the grid (graphical representation)*/
+    QList<QPoint> path_1, path_2;                     /** Lists holding paths vectors */
+    RobotGridMatrix Matrix(grid);                     /** Class for operating with grid */
+    RobotMapPath one(1);                              /** Generation of path for 1 robot */
+    RobotMapPath two(0);                              /** Generation of path for 2 robot */
+    Map Maze;                                         /** Class to hold maze for algorithms */
 
-    QList<RobotGridItem*> grid;
-    QList<QPoint> path_1, path_2;
-    RobotGridMatrix Matrix(grid);
-    RobotMapPath one(1); /** Path for 1 robot */
-    RobotMapPath two(0); /** Path for 2 robot */
-    Map Maze;
+    ui->areaPlot->setScene(scene);                          /* Set scene */
+    ui->areaPlot->setRenderHint(QPainter::Antialiasing);    /* Add antialiasing */
 
-    one.CreatePath();
-    two.CreatePath();
-    one.common_map(two);
+    one.CreatePath();       /* Create 1. path */
+    two.CreatePath();       /* Create 2. path */
+    one.common_map(two);    /* Merge paths together */
 
-    Maze.mapFromArray(one.common);
-    Matrix.MapToScene(Maze);
-    Matrix.AttachToScene(scene);
+    Maze.mapFromArray(one.common); /** Convert commnon map to condinate format */
+    Matrix.MapToScene(Maze);       /** Calculate positions of tiles in scene */
+    Matrix.AttachToScene(scene);   /** Attach tiles to scene (create graphic maze) */
 
     qDebug("CORNER::[0][0] => %d", Maze.popValue(QPoint(0,0)));
     qDebug("CORNER::[0][7] => %d", Maze.popValue(QPoint(0,7)));
     qDebug("CORNER::[9][7] => %d", Maze.popValue(QPoint(9,7)));
     qDebug("CORNER::[9][0] => %d", Maze.popValue(QPoint(9,0)));
 
-    RobotPath(Maze, path_1, path_2);
+    RobotPath(Maze, path_1, path_2);    /** Generate the paths vectors */
 
     RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0,path_1,QPoint(0,7));
     scene->addItem(bot);
