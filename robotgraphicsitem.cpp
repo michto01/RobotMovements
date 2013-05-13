@@ -1,13 +1,12 @@
 #include "robotgraphicsitem.h"
 
 RobotGraphicsItem::RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> path, QPoint end) : QGraphicsPixmapItem(pixmap,parent) {
+    qDebug("RobotGraphicsItem::RobotGraohicsItem() => called...");
     this->path       = &path;
     this->end        = end;
     this->isFinished = false;
     this->actualPathPosition = this->path->begin();
-    //this->animateMovement();
-
-    qDebug("RobotGraphicItem::Constructor : all setting applied");
+    qDebug("RobotGraphicsItem::RobotGraohicsItem() => initialized without errors...");
 }
 
 void RobotGraphicsItem::calculatePosition(QPoint point) {
@@ -36,6 +35,8 @@ RobotGraphicsItem::~RobotGraphicsItem()
 
 
 RobotGraphicsObject::RobotGraphicsObject(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> path, QPoint end): RobotGraphicsItem(pixmap,parent,path,end){
+    qDebug("RobotGraphicsObject::RobotGraohicsObject() => called...");
+    qDebug("RobotGraphicsObject::RobotGraohicsObject() => initialized without errors...");
 }
 
 RobotGraphicsObject::~RobotGraphicsObject(){

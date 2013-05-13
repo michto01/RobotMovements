@@ -2,12 +2,16 @@
 
 
 RobotGridItem::RobotGridItem(const QPixmap &pixmap, QGraphicsItem *parent) : QGraphicsPixmapItem(pixmap, parent){
+    qDebug("RobotGridItem::RobotGridItem() => called...");
     setCacheMode(NoCache);
+    qDebug("RobotGridItem::RobotGridItem() => initialized without errors...");
 }
 
 RobotGridItem::RobotGridItem(const QPixmap &pixmap, QGraphicsItem *parent, QPoint Coord) : QGraphicsPixmapItem(pixmap,parent){
+    qDebug("RobotGridItem::RobotGridItem() => called...");
     setCacheMode(NoCache);
     SetCoords(Coord);
+    qDebug("RobotGridItem::RobotGridItem() => initialized without errors...");
 }
 
 void RobotGridItem::SetTerrain(QString terrain){

@@ -1,16 +1,18 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "aboutdialog.h"
-#include "instructionsdialog.h"
-#include "robotmap.h"
-#include "robotpath.h"
-#include "robotgriditem.h"
-#include "robotgridmatrix.h"
-#include "robotgraphicsitem.h"
-#include "map.h"
+#include <QGraphicsPixmapItem>
 #include <QMessageBox>
 #include <QPixmap>
-#include <QGraphicsPixmapItem>
+
+#include "instructionsdialog.h"
+#include "ui_mainwindow.h"
+#include "aboutdialog.h"
+#include "mainwindow.h"
+
+#include "robotgraphicsitem.h"
+#include "robotgridmatrix.h"
+#include "robotgriditem.h"
+#include "robotpath.h"
+#include "robotmap.h"
+#include "map.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,7 +26,44 @@ MainWindow::~MainWindow() {
 
 void MainWindow::on_actionRun_triggered() {
 
-    int ib[8][10] = { {2,2,2,2,2,0,0,0,0,1},
+    QGraphicsScene *scene = new QGraphicsScene(this);
+    ui->areaPlot->setScene(scene);
+    ui->areaPlot->setRenderHint(QPainter::Antialiasing);
+
+    QList<RobotGridItem*> grid;
+    QList<QPoint> path_1, path_2;
+    RobotGridMatrix Matrix(grid);
+    RobotMapPath one(1); /** Path for 1 robot */
+    RobotMapPath two(0); /** Path for 2 robot */
+    Map Maze;
+
+    one.CreatePath();
+    two.CreatePath();
+    one.common_map(two);
+
+    Maze.mapFromArray(one.common);
+    Matrix.MapToScene(Maze);
+    Matrix.AttachToScene(scene);
+
+    qDebug("CORNER::[0][0] => %d", Maze.popValue(QPoint(0,0)));
+    qDebug("CORNER::[0][7] => %d", Maze.popValue(QPoint(0,7)));
+    qDebug("CORNER::[9][7] => %d", Maze.popValue(QPoint(9,7)));
+    qDebug("CORNER::[9][0] => %d", Maze.popValue(QPoint(9,0)));
+
+    RobotPath(Maze, path_1, path_2);
+
+    RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0,path_1,QPoint(0,7));
+    scene->addItem(bot);
+
+    qDebug() << "Action->run";
+
+    /** IDEA BOX - STUFF TESTED, TESTING, DEPRE., UNUSED */
+
+    //QListIterator<QPoint> i(path_1); while(i.hasNext()) qDebug() << i.next();
+    //QSequentialAnimationGroup *Bot1Path1 = new QSequentialAnimationGroup;
+    //bot->animation(Bot1Path1);
+    /*
+    int tmp[8][10] = {{2,2,2,2,2,0,0,0,0,1},
                       {0,0,0,0,2,0,0,0,1,1},
                       {0,0,1,1,3,1,1,1,1,0},
                       {1,1,1,0,2,0,0,0,0,0},
@@ -32,43 +71,7 @@ void MainWindow::on_actionRun_triggered() {
                       {1,0,0,0,0,0,2,0,0,0},
                       {1,0,0,0,0,0,2,2,2,0},
                       {1,0,0,0,0,0,0,0,2,2}};
-
-    QGraphicsScene *scene = new QGraphicsScene(this);
-    ui->areaPlot->setScene(scene);
-    ui->areaPlot->setRenderHint(QPainter::Antialiasing);
-
-    QList<RobotGridItem*> grid;
-    QList<QPoint> path_1, path_2;
-
-    RobotGridMatrix Matrix(grid);
-
-    //Maze.ImportMaze(ib);
-
-    RobotMapPath one(0); /** Path for 1 robot */
-    RobotMapPath two(0); /** Path for 2 robot */
-
-    one.CreatePath();
-    two.CreatePath();
-
-    one.common_map(two);
-
-    Map Maze;
-    Maze.mapFromArray(one.map);
-    Matrix.MapToScene(Maze);
-    Matrix.AttachToScene(scene);
-    qDebug(">>> %d >>>", Maze.popValue(QPoint(0,0)));
-    qDebug(">>> %d >>>", Maze.popValue(QPoint(0,1)));
-    qDebug(">>> %d >>>", Maze.popValue(QPoint(1,0)));
-    qDebug(">>> %d >>>", Maze.popValue(QPoint(9,0)));
-
-
-    RobotPath(Maze, path_1, path_2);
-    //QListIterator<QPoint> i(path_1); while(i.hasNext()) qDebug() << i.next();
-    RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0,path_1,QPoint(0,7));
-    scene->addItem(bot);
-    //QSequentialAnimationGroup *Bot1Path1 = new QSequentialAnimationGroup;
-    //bot->animation(Bot1Path1);
-    qDebug() << "Action->run";
+    */
 }
 
 void MainWindow::on_actionReset_triggered() {

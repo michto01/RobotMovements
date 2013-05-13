@@ -23,6 +23,7 @@
         <file>keep-tile.png</file>
         <file>monolith3.png</file>
         <file>regular.png</file>
+        <file>water.png</file>
     </qresource>
     <qresource prefix="/files">
         <file>about.html</file>

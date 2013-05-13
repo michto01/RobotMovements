@@ -5,11 +5,13 @@
 #include <fstream>
 #include <cstdlib>
 #include <ctime>
+#include <QDebug>
 
 class RobotMap {
 
 public:
     int map[8][10];
+    int common[8][10];
     RobotMap();
     ~RobotMap();
     int SetWidth(int x);

@@ -1,6 +1,8 @@
 #include "map.h"
 
-Map::Map() {}
+Map::Map() {
+    qDebug("Map::Map()          => called...\nMap::Map()          => initialized without errors...");
+}
 Map::~Map() {}
 
 void Map::addItem(QPoint p, int value){
@@ -39,6 +41,7 @@ int Map::popValue(QPoint p){
 }
 
 void Map::mapFromArray(int array[8][10]){
+    qDebug("Map::mapFromArray() => conversion initialization");
     QString Terrain;
     for(int i = 0; i < 8; i++) {
         for(int j = 0; j < 10; j++) {
@@ -46,11 +49,12 @@ void Map::mapFromArray(int array[8][10]){
             {
                 case 0: Terrain = WALL; break;
                 case 3: Terrain = CRSS; break;
-                case 2:
+                case 2: Terrain = XATH; break;
                 case 1: Terrain = PATH; break;
 
             };
                 this->addItem(QPoint(j,i),array[i][j],Terrain);
         }
     }
+    qDebug("Map::mapFromArray() => conversion success");
 }

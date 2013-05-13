@@ -1,11 +1,13 @@
 #include "robotmap.h"
 
 RobotMap::RobotMap() {
+    qDebug("RobotMap::RobotMap() => called...");
     for (int i=0;i<8;i++) {
         for (int j=0;j<10;j++) {
             map[i][j]=0;
         }
     }
+    qDebug("RobotMap::RobotMap() => initialized without errors...");
 }
 
 RobotMap::~RobotMap() {
@@ -48,14 +50,20 @@ int RobotMapPath::CreatePath() {
             if (num_of_stepbacks==10) {//pokud se nemuze vymotat, zacne se znovu
                 this->wipe(); //premazani pole
                 if (robot) { //nastaveni puvodnich hodnot
-                    map[0][0]=1;pozx=0;pozy=0;
+                    map[0][0] = 1;
+                    pozx      = 0;
+                    pozy      = 0;
                 }
-                else {map[7][0]=1;pozx=0;pozy=7;}
+                else {
+                    map[7][0] = 1;
+                    pozx      = 0;
+                    pozy      = 7;
+                }
                 num_of_stepbacks=0;
             }
         };
-        if (pozx==9&&pozy==7&&robot)break; //dosazeni cile pro robota 1
-        if (pozx==9&&pozy==0&&(!robot))break; //dosazeni cile pro robota 2
+        if (pozx == 9 && pozy == 7 && robot)  break; //dosazeni cile pro robota 1
+        if (pozx == 9 && pozy == 0 &&(!robot))break; //dosazeni cile pro robota 2
     }
     return 0;
 }
@@ -258,22 +266,21 @@ int RobotMapPath::NextDirection() {
 }
 
 int RobotMapPath::common_map(RobotMapPath b) {
-    int common[8][10];
     std::ofstream vyst_soub;
 
     for (int i=0;i<8;i++) {
         for (int j=0;j<10;j++) {
             if (map[i][j]>0&&b.map[i][j]==0) {
-                common[i][j]=1;
+                common[i][j] = 1;
             }
             if (map[i][j]==0&&b.map[i][j]>0) {
-                common[i][j]=2;
+                common[i][j] = 2;
             }
             if (map[i][j]>0&&b.map[i][j]>0) {
-                common[i][j]=3;
+                common[i][j] = 3;
             }
             if (map[i][j]==0&&b.map[i][j]==0) {
-                common[i][j]=0;
+                common[i][j] = 0;
             }
         }
     }
@@ -284,7 +291,7 @@ int RobotMapPath::common_map(RobotMapPath b) {
         for (int j=0;j<10;j++) {
             vyst_soub<<common[7-i][j]<<" ";
         }
-        vyst_soub<<std::endl;
+        vyst_soub << std::endl;
     }
 
     return 0;

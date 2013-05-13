@@ -5,11 +5,13 @@
 
 
 RobotGridMatrix::RobotGridMatrix(QList<RobotGridItem *> items){
+ qDebug("RobotGridMatrix::RobotGridMatrix() => called...");
  this->items = &items;
+ qDebug("RobotGridMatrix::RobotGridMatrix() => initialized without errors...");
 }
 
 void RobotGridMatrix::ImportMaze(int maze[8][10]){
-
+    qDebug("RobotGridMatrix::ImportMaze()     => conversion initialized");
     for (int i = 0; i<8; i++) {
             for (int j = 0; j<10; j++) {
                 switch(maze[i][j]) {
@@ -20,6 +22,7 @@ void RobotGridMatrix::ImportMaze(int maze[8][10]){
                 }
             }
         }
+    qDebug("RobotGridMatrix::ImportMaze()     => conversion success");
 }
 
 RobotGridMatrix::~RobotGridMatrix(){

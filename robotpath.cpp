@@ -48,7 +48,7 @@ RobotPath::RobotPath(Map maze, QList<QPoint> botOnePath, QList<QPoint> botTwoPat
 
     Robot bot1, bot2;
     {
-        bot1.ID      = 1;
+        bot1.ID      = 2;
         bot1.Pos     = QPoint(9,0);
         bot1.Dir     = DOWN;
         bot1.PrevDir = DEFAULT;
@@ -56,25 +56,26 @@ RobotPath::RobotPath(Map maze, QList<QPoint> botOnePath, QList<QPoint> botTwoPat
         qDebug("ACTUAL: Maze[%d][%d] {0}",bot1.Pos.x(),bot1.Pos.y());
     }
     {
-        bot2.ID      = 2;
+        bot2.ID      = 1;
         bot2.Pos     = QPoint(9,7);
         bot2.Dir     = UP;
         bot2.PrevDir = DEFAULT;
         this->botTwoPath->append(bot2.Pos);
     }
     int t = 0;
-    while((bot1.Pos != QPoint(0,7)) || t < 50) {
+    while((bot1.Pos != QPoint(0,7))) {
         this->Movement(bot1);
         this->botOnePath->append(bot1.Pos);
-        qDebug("ACTUAL: MAZE[%d][%d]",bot1.Pos.x(),bot1.Pos.y());
-        t++;
+        qDebug("ACTUAL1: MAZE[%d][%d] => %d",bot1.Pos.x(),bot1.Pos.y(),t);
+        t++; if(t > 50) break;
     }
     t = 0;
-    while((bot2.Pos != QPoint(0,0)) || t < 50) {
+    qDebug("");
+    while((bot2.Pos != QPoint(0,0))) {
         this->Movement(bot2);
         this->botOnePath->append(bot2.Pos);
-        qDebug("ACTUAL2: MAZE[%d][%d]",bot2.Pos.x(),bot2.Pos.y());
-        t++;
+        qDebug("ACTUAL2: MAZE[%d][%d] => %d",bot2.Pos.x(),bot2.Pos.y(),t);
+        t++; if(t > 50) break;
     }
 }
 
