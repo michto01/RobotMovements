@@ -1,12 +1,16 @@
 #include "robotgraphicsitem.h"
 
-RobotGraphicsItem::RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> path, QPoint end) : QGraphicsPixmapItem(pixmap,parent) {
+RobotGraphicsItem::RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> &path, QPoint end) : QGraphicsPixmapItem(pixmap,parent), path(path) {
     qDebug("RobotGraphicsItem::RobotGraohicsItem() => called...");
-    this->path       = &path;
-    this->end        = end;
-    this->isFinished = false;
-    this->actualPathPosition = this->path->begin();
-    qDebug("RobotGraphicsItem::RobotGraohicsItem() => initialized without errors...");
+    this->path = path;
+
+    this->actualPosition     = this->path.takeFirst();
+    this->calculatePosition(this->actualPosition);
+
+    this->end                = end;
+    this->isFinished         = false;
+    this->actualPathPosition = this->path.begin();
+    qDebug("RobotGraphicsItem::RobotGraohicsItem() => finished...");
 }
 
 void RobotGraphicsItem::calculatePosition(QPoint point) {
@@ -17,16 +21,20 @@ void RobotGraphicsItem::calculatePosition(QPoint point) {
         this->actualScenePosition = QPoint(this->actualPosition.x()*54,(this->actualPosition.y()*71)+35);
 }
 
-void RobotGraphicsItem::animation(QSequentialAnimationGroup *group) {
-    /*for(this->actualPathPosition = this->path->begin(); this->actualPathPosition != this->path->end(); ++actualPathPosition) {
-        this->actualPosition = *(actualPathPosition);
-        this->calculatePosition(this->actualPosition);
-        this->setPos(this->actualScenePosition);
-        QPropertyAnimation *animation = new QPropertyAnimation(this, "pos",0);
+QPoint RobotGraphicsItem::takeFirstPathItem() {
+    return this->path.takeFirst();
+}
 
-        animation->setDuration(300);
-        group->addAnimation(animation);
-    }*/
+QPoint RobotGraphicsItem::getActualPosition() {
+    return this->actualPosition;
+}
+
+QPoint RobotGraphicsItem::getScenePosition() {
+    return this->actualScenePosition;
+}
+
+void RobotGraphicsItem::setActualPosition(QPoint terget) {
+    this->actualPosition = terget;
 }
 
 RobotGraphicsItem::~RobotGraphicsItem()
@@ -34,16 +42,41 @@ RobotGraphicsItem::~RobotGraphicsItem()
 }
 
 
-RobotGraphicsObject::RobotGraphicsObject(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> path, QPoint end): RobotGraphicsItem(pixmap,parent,path,end){
+RobotGraphicsObject::RobotGraphicsObject(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> &path, QPoint end): RobotGraphicsItem(pixmap,parent,path,end){
     qDebug("RobotGraphicsObject::RobotGraohicsObject() => called...");
+    this->posAnimation.setPropertyName("pos");
+    this->posAnimation.setTargetObject(this);
+    this->connect(&posAnimation, SIGNAL(finished()), SLOT(animationFinished()));
+    //this->animationFinished();
+    //this->posAnimation.start();
     qDebug("RobotGraphicsObject::RobotGraohicsObject() => initialized without errors...");
 }
 
 RobotGraphicsObject::~RobotGraphicsObject(){
 }
 
-void RobotGraphicsObject::animation() {
-    //this->animation();
-    return;
+void RobotGraphicsObject::animationFinished() {
+   if(!this->path.isEmpty()) {
+        qDebug("RobotGraphicsObject::animationFinished() => called...");
+        this->posAnimation.setStartValue(this->getPosition());
+        qDebug("{%d}{%d}", this->getPosition().x(),this->getPosition().y());
+        QPoint tmp = this->path.takeFirst();
+        this->setPosition(tmp);
+        this->calculatePosition(tmp);
+        this->posAnimation.setEndValue(this->getPosition());
+        qDebug("{%d}{%d}", this->getPosition().x(),this->getPosition().y());
+        this->posAnimation.start();
+        qDebug("RobotGraphicsObject::animationFinished() => running the animation...");
+    }
 }
 
+QPoint RobotGraphicsObject::getPosition() {
+    return this->getActualPosition();
+}
+
+
+void RobotGraphicsObject::setPosition(QPoint target) {
+    this->setActualPosition(target);
+    this->calculatePosition(target);
+    this->setPos(this->getPosition());
+}

@@ -33,7 +33,7 @@ class RobotPath
 
 public:
     RobotPath(RobotGridMatrix *Maze, QList<QPoint> botOnePath, QList<QPoint> botTwoPath);  /** Class constructor */
-    RobotPath(Map maze, QList<QPoint> botOnePath, QList<QPoint> botTwoPath);
+    RobotPath(Map maze, QList<QPoint> *botOnePath, QList<QPoint> *botTwoPath);
     void Movement(Robot& bot);
     ~RobotPath(); /** Class destructor */
     void FindDirection(Robot& BOT, int Elem); /** Methode to find next step */

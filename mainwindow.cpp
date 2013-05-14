@@ -1,6 +1,9 @@
 #include <QGraphicsPixmapItem>
 #include <QMessageBox>
 #include <QPixmap>
+#include <QTimer>
+#include <QtCore>
+#include <QtGui>
 
 #include "instructionsdialog.h"
 #include "ui_mainwindow.h"
@@ -36,7 +39,7 @@ void MainWindow::on_actionRun_triggered() {
 
     ui->areaPlot->setScene(scene);                          /* Set scene */
     ui->areaPlot->setRenderHint(QPainter::Antialiasing);    /* Add antialiasing */
-
+    ui->areaPlot->setBackgroundBrush(QPixmap(":/terrain/background.png"));
     one.CreatePath();       /* Create 1. path */
     two.CreatePath();       /* Create 2. path */
     one.common_map(two);    /* Merge paths together */
@@ -50,10 +53,19 @@ void MainWindow::on_actionRun_triggered() {
     qDebug("CORNER::[9][7] => %d", Maze.popValue(QPoint(9,7)));
     qDebug("CORNER::[9][0] => %d", Maze.popValue(QPoint(9,0)));
 
-    RobotPath(Maze, path_1, path_2);    /** Generate the paths vectors */
+    RobotPath(Maze, &path_1, &path_2);    /** Generate the paths vectors */
+    qDebug("HIRE: %d", path_1.isEmpty());
 
-    RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0,path_1,QPoint(0,7));
+    RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0, path_1, QPoint(0,7));
     scene->addItem(bot);
+    bot->animationFinished();
+    scene->update();
+
+    /*QPropertyAnimation animation(bot,"pos");
+    animation.setDuration(10000);
+    animation.setStartValue(QPoint(0,0));
+    animation.setEndValue(QPoint(300,500));
+    animation.start();*/
 
     qDebug() << "Action->run";
 
@@ -72,6 +84,7 @@ void MainWindow::on_actionRun_triggered() {
                       {1,0,0,0,0,0,2,2,2,0},
                       {1,0,0,0,0,0,0,0,2,2}};
     */
+
 }
 
 void MainWindow::on_actionReset_triggered() {

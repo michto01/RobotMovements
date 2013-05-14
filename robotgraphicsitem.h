@@ -13,7 +13,6 @@
 class RobotGraphicsItem : public QGraphicsPixmapItem  {
 
 private:
-    QList<QPoint> *path;
     QList<QPoint>::Iterator actualPathPosition;
     QPoint        actualPosition;
     QPoint        actualScenePosition;
@@ -22,19 +21,33 @@ private:
     int           isFinished;
 
 public:
-    RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> path, QPoint end);
+    QList<QPoint>& path;
+
+public:
+    RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> &path, QPoint end);
     void calculatePosition(QPoint point);
-    void animation(QSequentialAnimationGroup *group);
+    //void animation(QSequentialAnimationGroup *group);
+    QPoint takeFirstPathItem();
+    QPoint getActualPosition();
+    QPoint getScenePosition();
+
+    void setActualPosition(QPoint terget);
     ~RobotGraphicsItem();
 };
 
 class RobotGraphicsObject : public QObject, public RobotGraphicsItem {
     Q_OBJECT
-    //Q_PROPERTY (QPoint pos READ Pos WRITE setPos)
+    Q_PROPERTY(QPoint pos READ getPosition WRITE setPosition)
+
+private:
+    QPropertyAnimation posAnimation;
+
 public slots:
-    void animation();
+    void animationFinished();
+    QPoint getPosition();
+    void setPosition(QPoint target);
 public:
-    RobotGraphicsObject(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> path, QPoint end);
+    RobotGraphicsObject(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> &path, QPoint end);
     ~RobotGraphicsObject();
 };
 

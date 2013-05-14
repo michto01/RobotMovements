@@ -41,9 +41,9 @@ RobotPath::RobotPath(RobotGridMatrix *Maze, QList<QPoint> botOnePath, QList<QPoi
     }*/
 }
 
-RobotPath::RobotPath(Map maze, QList<QPoint> botOnePath, QList<QPoint> botTwoPath) {
-    this->botOnePath = &botOnePath;
-    this->botTwoPath = &botTwoPath;
+RobotPath::RobotPath(Map maze, QList<QPoint> *botOnePath, QList<QPoint> *botTwoPath) {
+    this->botOnePath = botOnePath;
+    this->botTwoPath = botTwoPath;
     this->map        = &maze;
 
     Robot bot1, bot2;
@@ -77,6 +77,7 @@ RobotPath::RobotPath(Map maze, QList<QPoint> botOnePath, QList<QPoint> botTwoPat
         qDebug("ACTUAL2: MAZE[%d][%d] => %d",bot2.Pos.x(),bot2.Pos.y(),t);
         t++; if(t > 50) break;
     }
+    qDebug("RobotPath::isEmpty(): %d", this->botOnePath->isEmpty());
 }
 
 void RobotPath::Movement(Robot &bot) {
