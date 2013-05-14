@@ -9,7 +9,7 @@ RobotGraphicsItem::RobotGraphicsItem(const QPixmap &pixmap, QGraphicsItem *paren
 
     this->end                = end;
     this->isFinished         = false;
-    this->actualPathPosition = this->path.begin();
+    this->setPos(actualScenePosition.x(),actualScenePosition.y());
     qDebug("RobotGraphicsItem::RobotGraohicsItem() => finished...");
 }
 
@@ -56,11 +56,12 @@ RobotGraphicsObject::~RobotGraphicsObject(){
 }
 
 void RobotGraphicsObject::animationFinished() {
-   if(!this->path.isEmpty()) {
+    QList<QPoint> *list = &path;
+   if(!list->isEmpty()) {
         qDebug("RobotGraphicsObject::animationFinished() => called...");
         this->posAnimation.setStartValue(this->getPosition());
         qDebug("{%d}{%d}", this->getPosition().x(),this->getPosition().y());
-        QPoint tmp = this->path.takeFirst();
+        QPoint tmp = list->takeFirst();
         this->setPosition(tmp);
         this->calculatePosition(tmp);
         this->posAnimation.setEndValue(this->getPosition());
@@ -70,8 +71,26 @@ void RobotGraphicsObject::animationFinished() {
     }
 }
 
+void RobotGraphicsObject::animation(QPoint start, QPoint end) {
+    qDebug("RobotGraphicsObject::animation() => called...");
+    this->setPosition(start);
+    this->calculatePosition(start);
+    this->posAnimation.setStartValue(this->getPosition());
+    qDebug("{%d}{%d}", this->getPosition().x(),this->getPosition().y());
+    this->setPosition(end);
+    this->calculatePosition(end);
+    this->posAnimation.setEndValue(this->getPosition());
+    qDebug("{%d}{%d}", this->getPosition().x(),this->getPosition().y());
+    this->posAnimation.start();
+    qDebug("RobotGraphicsObject::animation() => running the animation...");
+}
+
+QPropertyAnimation RobotGraphicsObject::getAnimation() {
+    //return this->posAnimation;
+}
+
 QPoint RobotGraphicsObject::getPosition() {
-    return this->getActualPosition();
+    return this->getScenePosition();
 }
 
 

@@ -57,8 +57,31 @@ void MainWindow::on_actionRun_triggered() {
     qDebug("HIRE: %d", path_1.isEmpty());
 
     RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0, path_1, QPoint(0,7));
+    RobotGraphicsObject *bot2 = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0, path_2, QPoint(0,7));
     scene->addItem(bot);
-    bot->animationFinished();
+    scene->addItem(bot2);
+
+    QSequentialAnimationGroup *group1 = new QSequentialAnimationGroup;
+    QListIterator<QPoint> PathIteration(path_1);
+    PathIteration.next();
+    while(PathIteration.hasNext()) {
+        QPropertyAnimation *animation = new QPropertyAnimation(bot,"pos",this);
+        animation->setStartValue(PathIteration.peekPrevious());
+        animation->setEndValue(PathIteration.next());
+        group1->addAnimation(animation);
+    }
+
+    QListIterator<QPoint> PathIteration2(path_2);
+    PathIteration2.next();
+    while(PathIteration2.hasNext()) {
+        QPropertyAnimation *animation = new QPropertyAnimation(bot2,"pos",this);
+        animation->setStartValue(PathIteration2.peekPrevious());
+        animation->setEndValue(PathIteration2.next());
+        group1->addAnimation(animation);
+    }
+
+    group1->start();
+
     scene->update();
 
     /*QPropertyAnimation animation(bot,"pos");

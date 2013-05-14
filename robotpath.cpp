@@ -73,7 +73,7 @@ RobotPath::RobotPath(Map maze, QList<QPoint> *botOnePath, QList<QPoint> *botTwoP
     qDebug("");
     while((bot2.Pos != QPoint(0,0))) {
         this->Movement(bot2);
-        this->botOnePath->append(bot2.Pos);
+        this->botTwoPath->append(bot2.Pos);
         qDebug("ACTUAL2: MAZE[%d][%d] => %d",bot2.Pos.x(),bot2.Pos.y(),t);
         t++; if(t > 50) break;
     }

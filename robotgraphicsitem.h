@@ -13,7 +13,6 @@
 class RobotGraphicsItem : public QGraphicsPixmapItem  {
 
 private:
-    QList<QPoint>::Iterator actualPathPosition;
     QPoint        actualPosition;
     QPoint        actualScenePosition;
     QPoint        end;
@@ -49,6 +48,8 @@ public slots:
 public:
     RobotGraphicsObject(const QPixmap &pixmap, QGraphicsItem *parent, QList<QPoint> &path, QPoint end);
     ~RobotGraphicsObject();
+    void animation(QPoint start, QPoint end);
+    QPropertyAnimation getAnimation();
 };
 
 #endif // ROBOTGRAPHICSITEM_H
