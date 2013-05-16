@@ -56,7 +56,7 @@ void MainWindow::on_actionRun_triggered() {
     RobotPath(Maze, &path_1, &path_2);    /** Generate the paths vectors */
     qDebug("HIRE: %d", path_1.isEmpty());
 
-    RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0, path_1, QPoint(0,7));
+    RobotGraphicsObject *bot = new RobotGraphicsObject(QPixmap(":/terrain/captain.png"),0, path_1, QPoint(0,7));
     RobotGraphicsObject *bot2 = new RobotGraphicsObject(QPixmap(":/terrain/monolith3.png"),0, path_2, QPoint(0,7));
     scene->addItem(bot);
     scene->addItem(bot2);

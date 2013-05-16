@@ -8,7 +8,7 @@
 #include <QList>
 
 #define CRSS QString(":/terrain/grounds.png")
-#define PATH QString(":/terrain/green.png")
+#define PATH QString(":/terrain/beach.png")
 #define XATH QString(":/terrain/water.png")
 #define WALL QString(":/terrain/regular.png")
 

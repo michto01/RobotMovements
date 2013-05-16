@@ -25,6 +25,11 @@
         <file>regular.png</file>
         <file>water.png</file>
         <file>background.png</file>
+        <file>captain.png</file>
+        <file>beach.png</file>
+        <file>hover-hex.png</file>
+        <file>hover-hex-enemy.png</file>
+        <file>hover-hex-yours.png</file>
     </qresource>
     <qresource prefix="/files">
         <file>about.html</file>

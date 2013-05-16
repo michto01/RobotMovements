@@ -214,47 +214,33 @@ int RobotMapPath::NextDirection() {
 
     int random=rand()%num_of_dir+1;
 
-    if (random==1) {
-        if (l) {
-            return 4;
-        }
-        else if (r) {
-            return 6;
-        }
-        else if (u) {
-            return 8;
-        }
+    if (random == 1) {
+             if (l) { return 4; }
+        else if (r) { return 6; }
+        else if (u) { return 8; }
         return 2;
     }
-    if (random==2) {
+
+    if (random == 2) {
         if (l) {
-            if (r) {
-                return 6;
-            }
-            else if (u) {
-                return 8;
-            }
+                 if (r) { return 6; }
+            else if (u) { return 8; }
             return 2;
         }
         else if (r) {
-            if (u) {
-                return 8;
-            }
+            if (u) { return 8; }
             return 2;
         }
         else return 2;
     }
-    if (random==3) {
+
+    if (random == 3) {
         if (l) {
             if (r) {
-                if (u) {
-                    return 8;
-                }
+                if (u) { return 8; }
                 else return 2;
             }
-            else  {
-                return 2;
-            }
+            else  { return 2; }
         }
         else return 2;
     }
@@ -296,3 +282,37 @@ int RobotMapPath::common_map(RobotMapPath b) {
 
     return 0;
 }
+
+/*
+
+    int common[8][10];
+    ofstream vyst_soub;
+    for (int i=0;i<8;i++) {
+        for (int j=0;j<10;j++) {
+            if (map[i][j]>0&&b.map[i][j]==0) {
+                common[i][j]=map[i][j];
+            }
+            if (map[i][j]==0&&b.map[i][j]>0) {
+                common[i][j]=b.map[i][j]*(-1);
+            }
+            if (map[i][j]>0&&b.map[i][j]>0) {
+                common[i][j]=b.map[i][j]*(-1);
+                //common[i][j]=3;
+            }
+
+            if (map[i][j]==0&&b.map[i][j]==0) {
+                common[i][j]=0;
+            }
+        }
+    }
+    vyst_soub.open("mapa.txt");
+
+    for (int i=0;i<8;i++) {
+        for (int j=0;j<10;j++) {
+            vyst_soub<<common[7-i][j]<<" ";
+        }
+        vyst_soub<<endl;
+    }
+    return 0;
+
+*/
